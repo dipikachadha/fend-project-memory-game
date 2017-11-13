@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
+let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
         "fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond",
         "fa fa-bomb","fa fa-leaf","fa fa-bomb","fa fa-bolt","fa fa-bicycle",
         "fa fa-paper-plane-o","fa fa-cube"];
@@ -29,6 +29,16 @@ function shuffle(array) {
     return array;
 }
 
+list = shuffle(list);
+
+let text = "";
+for (const card of list) {
+    text += `
+    <li class = "card">
+      <i class = "${card}"></i>
+    </li>`;
+}
+document.getElementsByClassName("deck")[0].innerHTML = text;
 
 /*
  * set up the event listener for a card. If a card is clicked:
