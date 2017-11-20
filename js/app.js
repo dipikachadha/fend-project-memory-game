@@ -57,12 +57,12 @@ function stopTimer() {
 document.getElementsByClassName("card")[0].addEventListener("click",function flip(index) {
   if (selectedCard == 0) {
     One = index;
-    document.getElementsByClassName("card")[0].innerHTML = "<i class \="${list[index]}\"></i>"
+    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[index]}\"></i>"
     selectedCard == 1;
   } else {
     selectedCard == 2;
     Two = index;
-    document.getElementsByClassName("card")[0].innerHTML = "<i class \="${list[index]}\"></i>"
+    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[index]}\"></i>"
     startTimer();
   }
 });
