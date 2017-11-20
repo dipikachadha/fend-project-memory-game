@@ -40,6 +40,58 @@ for (const card of list) {
 }
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
+
+let selectedCard = 0;
+let One; //the first image choosen
+let Two; //the second image choosen
+let move_counter = 0;
+
+function startTimer () {
+  s = setInterval(match,700);
+}
+
+function stopTimer() {
+  clearInterval(s);
+}
+
+document.getElementsByClassName("card")[0].addEventListener("click",function flip(index) {
+  if (selectedCard == 0) {
+    One = index;
+    card.innerHTML = list.array[index];
+    selectedCard == 1;
+  } else {
+    selectedCard == 2;
+    Two = index;
+    card.innerHTML = list.array[index];
+    startTimer();
+  }
+});
+
+function match () {
+  stopTimer();
+
+  if (list[one] == list[two]) {
+    move_counter++;
+    selectedCard = 0;
+  } else if (list[one] !== list[two]) {
+    function flipBack(){
+      list[one] = back;
+      list[two] = back;
+      selectedCard = 0;
+    }
+    setTimeout(flipBack(),700);
+  }
+  if(move_counter = list.length/2) {
+    document.getElementsByClassName("container")[0].innerHTML = "YOU COMPLETED THE GAME-HIT RESTART TO PLAY AGAIN";
+  }
+  shuffle(list);
+}
+
+document.getElementsByClassName("moves")[0].innerHTML = move_counter;
+
+
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
