@@ -54,15 +54,15 @@ function stopTimer() {
   clearInterval(s);
 }
 
-document.getElementsByClassName("card")[0].addEventListener("click",function flip(index) {
+document.getElementsByClassName("card")[0].addEventListener("click",function flip() {
   if (selectedCard == 0) {
-    One = index;
-    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[index]}\"></i>"
+    One = list[0];
+    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[0]}\"></i>"
     selectedCard == 1;
   } else {
     selectedCard == 2;
-    Two = index;
-    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[index]}\"></i>"
+    Two = list[1];
+    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[0]}\"></i>"
     startTimer();
   }
 });
