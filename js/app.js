@@ -41,51 +41,74 @@ for (const card of list) {
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
 
-let selectedCard = 0;
-let One; //the first image choosen
-let Two; //the second image choosen
-let move_counter = 0;
+// let selectedCard = 0;
+// let One; //the first image choosen
+// let Two; //the second image choosen
+ let move_counter = 0;
+//
+// function startTimer () {
+//   s = setInterval(match,700);
+// }
+//
+// function stopTimer() {
+//   clearInterval(s);
+// }
 
-function startTimer () {
-  s = setInterval(match,700);
-}
+  // if (selectedCard == 0) {
+  //   One = list[0];
+  //     document.getElementsByClassName("card")[0].innerHTML = `<i class ="${list[0]}"></i>`
+  //   selectedCard == 1;
+  // } else {
+  //   selectedCard == 2;
+  //   Two = list[1];
+  //     document.getElementsByClassName("card")[0].innerHTML = `<i class ="${list[0]}"></i>`
+  //   startTimer();
+  // }
+// });
 
-function stopTimer() {
-  clearInterval(s);
-}
 
-document.getElementsByClassName("card")[0].addEventListener("click",function flip() {
-  if (selectedCard == 0) {
-    One = list[0];
-    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[0]}\"></i>"
-    selectedCard == 1;
-  } else {
-    selectedCard == 2;
-    Two = list[1];
-    document.getElementsByClassName("card")[0].innerHTML = "<i class =\"${list[0]}\"></i>"
-    startTimer();
-  }
-});
+  $('.card').click(function() {
+    $(this).toggleClass('open show');
+  });
 
-function match () {
-  stopTimer();
-
-  if (list[one] == list[two]) {
-    move_counter++;
-    selectedCard = 0;
-  } else if (list[one] !== list[two]) {
-    function flipBack(){
-      list[one] = back;
-      list[two] = back;
-      selectedCard = 0;
+  function match() {
+    if($('.selected').length === 2) {
+      if($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
+        $('.selected').each(fucntion () {
+          $(this).animate({shake: 3});
+        });
+        $('.selected').each(function() {
+          $(this).removeClass('selected');
+        });
+      } else {
+        setTimeout(function() {
+          $('.selected').each(function() {
+            $(this).html('').removeClass('selected');
+          });
+        }, 700);
+      }
     }
-    setTimeout(flipBack(),700);
   }
-  if(move_counter = list.length/2) {
-    document.getElementsByClassName("container")[0].innerHTML = "YOU COMPLETED THE GAME-HIT RESTART TO PLAY AGAIN";
-  }
-  shuffle(list);
-}
+
+// function match () {
+//   stopTimer();
+//
+//   if (list[one] == list[two]) {
+//     move_counter++;
+//     selectedCard = 0;
+//   } else if (list[one] !== list[two]) {
+//     function flipBack(){
+//       list[one] = back;
+//       list[two] = back;
+//       selectedCard = 0;
+//     }
+//     setTimeout(flipBack,700);
+//   }
+//   if(move_counter = list.length/2) {
+//     document.getElementsByClassName("container")[0].innerHTML = "YOU COMPLETED THE GAME-HIT RESTART TO PLAY AGAIN";
+//   }
+//   shuffle(list);
+// }
 
 document.getElementsByClassName("moves")[0].innerHTML = move_counter;
 
