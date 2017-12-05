@@ -1,11 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
+
 let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
         "fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond",
         "fa fa-bomb","fa fa-leaf","fa fa-bomb","fa fa-bolt","fa fa-bicycle",
         "fa fa-paper-plane-o","fa fa-cube"];
-
+        
+let ImgOpened = "";
+let imgFound = 0;
 
 /*
  * Display the cards on the page
@@ -41,76 +44,61 @@ for (const card of list) {
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
 
-// let selectedCard = 0;
-// let One; //the first image choosen
-// let Two; //the second image choosen
- let move_counter = 0;
-//
-// function startTimer () {
-//   s = setInterval(match,700);
-// }
-//
-// function stopTimer() {
-//   clearInterval(s);
-// }
-
-  // if (selectedCard == 0) {
-  //   One = list[0];
-  //     document.getElementsByClassName("card")[0].innerHTML = `<i class ="${list[0]}"></i>`
-  //   selectedCard == 1;
-  // } else {
-  //   selectedCard == 2;
-  //   Two = list[1];
-  //     document.getElementsByClassName("card")[0].innerHTML = `<i class ="${list[0]}"></i>`
-  //   startTimer();
-  // }
-// });
 
 
-  $('.card').click(function() {
-    $(this).toggleClass('open show');
-  });
+//function ResetGame() {
 
-  function match() {
-    if($('.selected').length === 2) {
-      if($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
-        $('.selected').each(fucntion () {
-          $(this).animate({shake: 3});
-        });
-        $('.selected').each(function() {
-          $(this).removeClass('selected');
-        });
+//}
+$('.card').click(function() {
+  $(this).toggleClass('open show');
+  //if $(this).children().first().attr('.class') == $(open_cards[open_cards.length-1]).children().first().attr('.class') {
+    //open_cards.push(this);
+function OpenCard() {
+  if(ImgOpened == "") {
+    ImgOpened = $(this).children().first();
+    setTimeout(function() {
+      $(this).bind('click',OpenCard)
+    },500)
+  } else {
+    CurrentOpened = $(this).children().last();
+      if(ImgOpened != CurrentOpened) {
+        setTimeout(function(){
+          $(this).toggle();
+          ImgOpened ="";
+        }, 400);
       } else {
-        setTimeout(function() {
-          $('.selected').each(function() {
-            $(this).html('').removeClass('selected');
-          });
-        }, 700);
+        $(this).parent().hide();
+        ImgFound++;
       }
     }
   }
-
-// function match () {
-//   stopTimer();
+});
+// var card1 = undefined;
+// var card2 = undefined;
 //
-//   if (list[one] == list[two]) {
-//     move_counter++;
-//     selectedCard = 0;
-//   } else if (list[one] !== list[two]) {
-//     function flipBack(){
-//       list[one] = back;
-//       list[two] = back;
-//       selectedCard = 0;
+// $('.card').click(function() {
+//   if($(this).attr('class') === 'open show') {
+//       $card1 = list[0];
+//     } else {
+//       $card2 = list[1];
 //     }
-//     setTimeout(flipBack,700);
-//   }
+//      if ($($card1).text() === $($card2).text()){
+//        $(this).is('match');
+//      } else {
+//        $(this).toggleClass('card');
+//      }
+//   })
+
+
+
+
 //   if(move_counter = list.length/2) {
 //     document.getElementsByClassName("container")[0].innerHTML = "YOU COMPLETED THE GAME-HIT RESTART TO PLAY AGAIN";
 //   }
 //   shuffle(list);
 // }
 
-document.getElementsByClassName("moves")[0].innerHTML = move_counter;
+//document.getElementsByClassName("moves")[0].innerHTML = move_counter;
 
 
 
