@@ -78,14 +78,15 @@ function openCard(card) {
       document.getElementsByClassName("deck")[0].innerHTML = "You have completed the game. Hit restart to play again.";
     }
   }
-  //
-  // $('.restart').click(function() {
-  //   $('.card').children().removeClass('open show');
-  //   move_counter = 0;
-  //   ImgFound = 0;
-  //   shuffle(list);
-  //   return false;
-  // })
+
+  $('.restart').click(function() {
+    // $('.card').children().removeClass('open show');
+    // move_counter = 0;
+    // ImgFound = 0;
+    // shuffle(list);
+    // return false;
+    location.reload()
+  })
 
 
 
