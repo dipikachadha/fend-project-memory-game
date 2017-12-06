@@ -10,6 +10,7 @@ let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
  let move_counter = 0;
  let ImgFound = 0;
  open_card = [];
+ $ratingStars = $('i');
 
 /*
  * Display the cards on the page
@@ -31,7 +32,7 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
 
 list = shuffle(list);
 
@@ -45,6 +46,7 @@ for (const card of list) {
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
 
+//flipping the card when it is clicked
 $('.card').click(function() {
   $(this).toggleClass('open show');
   openCard(this);
@@ -52,6 +54,7 @@ $('.card').click(function() {
   gameWon();
 });
 
+//Comparison of two cards in order to match
 function openCard(card) {
   open_card.push(card);
   if (open_card.length > 1) {
@@ -66,27 +69,41 @@ function openCard(card) {
           ImgFound++;
       }
     }
-  }
+  };
 
-  function moveCounter() {
-    move_counter++;
-    document.getElementsByClassName("moves")[0].innerHTML = move_counter;
-  }
+//Increment of moves when a card is clicked and then removing star on counts
+function moveCounter() {
+  move_counter++;
+  document.getElementsByClassName("moves")[0].innerHTML = move_counter;
 
-  function gameWon() {
-    if(ImgFound == list.length/2) {
-      document.getElementsByClassName("deck")[0].innerHTML = "You have completed the game. Hit restart to play again.";
-    }
-  }
+  if(move_counter > 10 && move_counter < 15) {
+    $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
 
-  $('.restart').click(function() {
-    // $('.card').children().removeClass('open show');
-    // move_counter = 0;
-    // ImgFound = 0;
-    // shuffle(list);
-    // return false;
-    location.reload()
-  })
+  } else if (move_counter > 15 && move_counter < 20) {
+    $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+
+  } else if (move_counter > 20 && move_counter < 25) {
+    $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
+
+  }
+};
+
+//logic of finishing the game
+function gameWon() {
+  if(ImgFound == list.length/2) {
+    document.getElementsByClassName("deck")[0].innerHTML = "You have completed the game. Hit restart to play again.";
+  }
+};
+
+//Restart the game
+$('.restart').click(function() {
+  location.reload()
+})
+
+
+
+
+
 
 
 
