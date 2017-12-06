@@ -10,7 +10,7 @@ let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
  let move_counter = 0;
  let ImgFound = 0;
  open_card = [];
- $ratingStars = $('i');
+ var mySound;
 
 /*
  * Display the cards on the page
@@ -44,6 +44,7 @@ for (const card of list) {
     </li>`;
 }
 document.getElementsByClassName("deck")[0].innerHTML = text;
+
 
 
 //flipping the card when it is clicked
@@ -83,13 +84,13 @@ function moveCounter() {
 function setRating() {
     var rating = 3;
     if(move_counter > 10 && move_counter < 15) {
-      $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
+      $('i').eq(3).removeClass('fa-star').addClass('fa-star-o');
       rating = 2;
     } else if (move_counter > 15 && move_counter < 20) {
-      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+      $('i').eq(2).removeClass('fa-star').addClass('fa-star-o');
       rating = 1;
     } else if (move_counter > 20 && move_counter < 25) {
-      $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
+      $('i').eq(1).removeClass('fa-star').addClass('fa-star-o');
       rating = 0;
     }
     //return(rating);
@@ -111,12 +112,19 @@ $('.restart').click(function() {
 var secondsElapsed = 0;
 // Update the count down every 1 second
 var x = setInterval(function() {
- secondsElapsed++;
-
- // Display the result in the element with id="timer"
- document.getElementsByClassName("timer")[0].innerHTML =
-   Math.floor(secondsElapsed / 60) + "m " + (secondsElapsed % 60) + "s ";
+  secondsElapsed++;
+// Display the result in the element with id="timer"
+  document.getElementsByClassName("timer")[0].innerHTML =
+  Math.floor(secondsElapsed / 60) + "m " + (secondsElapsed % 60) + "s ";
 }, 1000);
+
+// var secs = 0;
+//     var id = setInterval(function(){
+//       document.getElementsByClassName("timer")[0].innerHTML = secs++;
+//     }, 1000);
+//     var stop = function() {
+//         clearInterval();
+//     }
 
 
 
