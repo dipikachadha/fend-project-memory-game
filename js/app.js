@@ -62,12 +62,13 @@ function openCard(card) {
     if ($(open_card).children().first().attr('class') !=
         $(open_card).children().last().attr('class')) {
           setTimeout(function(){
-            $(open_card).removeClass('open show');
+            $(open_card).removeClass('open show ').addClass('animated infinite rubberBand');
             open_card = [];
           }, 400);
         } else {
-          $(open_card).addClass('match');
+          $(open_card).addClass('match animated infinite wobble');
           ImgFound++;
+          open_card = [];
       }
     }
   };
@@ -79,7 +80,7 @@ function moveCounter() {
 };
 
 //SetRating as per the decrement of move_counter as stars will decrement
-function setRating(rating) {
+function setRating() {
     var rating = 3;
     if(move_counter > 10 && move_counter < 15) {
       $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
@@ -91,6 +92,7 @@ function setRating(rating) {
       $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
       rating = 0;
     }
+    //return(rating);
 };
 
 //logic of finishing the game
@@ -105,27 +107,16 @@ $('.restart').click(function() {
   location.reload()
 })
 
-
 //Timer goes here
-var countDownDate = new Date().getTime();
-
+var secondsElapsed = 0;
 // Update the count down every 1 second
 var x = setInterval(function() {
+ secondsElapsed++;
 
-  // Get todays date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now an the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementsByClassName("timer")[0].innerHTML = minutes + "m " + seconds + "s ";
-});
-
+ // Display the result in the element with id="timer"
+ document.getElementsByClassName("timer")[0].innerHTML =
+   Math.floor(secondsElapsed / 60) + "m " + (secondsElapsed % 60) + "s ";
+}, 1000);
 
 
 
