@@ -52,6 +52,7 @@ $('.card').click(function() {
   openCard(this);
   moveCounter();
   gameWon();
+  setRating();
 });
 
 //Comparison of two cards in order to match
@@ -63,7 +64,7 @@ function openCard(card) {
           setTimeout(function(){
             $(open_card).removeClass('open show');
             open_card = [];
-          }, 700);
+          }, 400);
         } else {
           $(open_card).addClass('match');
           ImgFound++;
@@ -71,27 +72,31 @@ function openCard(card) {
     }
   };
 
-//Increment of moves when a card is clicked and then removing star on counts
+//Increment of moves when a card is clicked
 function moveCounter() {
   move_counter++;
   document.getElementsByClassName("moves")[0].innerHTML = move_counter;
+};
 
-  if(move_counter > 10 && move_counter < 15) {
-    $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
-
-  } else if (move_counter > 15 && move_counter < 20) {
-    $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
-
-  } else if (move_counter > 20 && move_counter < 25) {
-    $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
-
-  }
+//SetRating as per the decrement of move_counter as stars will decrement
+function setRating(rating) {
+    var rating = 3;
+    if(move_counter > 10 && move_counter < 15) {
+      $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
+      rating = 2;
+    } else if (move_counter > 15 && move_counter < 20) {
+      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+      rating = 1;
+    } else if (move_counter > 20 && move_counter < 25) {
+      $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
+      rating = 0;
+    }
 };
 
 //logic of finishing the game
 function gameWon() {
   if(ImgFound == list.length/2) {
-    document.getElementsByClassName("deck")[0].innerHTML = "You have completed the game. Hit restart to play again.";
+    document.getElementsByClassName("deck")[0].innerHTML = 'Congratulation, You Won! with ' + move_counter + ' moves and with ' + rating + 'star';
   }
 };
 
@@ -101,14 +106,25 @@ $('.restart').click(function() {
 })
 
 
+//Timer goes here
+var countDownDate = new Date().getTime();
 
+// Update the count down every 1 second
+var x = setInterval(function() {
 
+  // Get todays date and time
+  var now = new Date().getTime();
 
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
 
+  // Time calculations for days, hours, minutes and seconds
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-
-
-
+  // Display the result in the element with id="demo"
+  document.getElementsByClassName("timer")[0].innerHTML = minutes + "m " + seconds + "s ";
+});
 
 
 
