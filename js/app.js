@@ -7,8 +7,9 @@ let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
         "fa fa-bomb","fa fa-leaf","fa fa-bomb","fa fa-bolt","fa fa-bicycle",
         "fa fa-paper-plane-o","fa fa-cube"];
 
-let ImgOpened = "";
-let ImgFound = 0;
+ let move_counter = 0;
+ let ImgFound = 0;
+ open_card = [];
 
 /*
  * Display the cards on the page
@@ -44,61 +45,53 @@ for (const card of list) {
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
 
-
-
-//function ResetGame() {
-
-//}
 $('.card').click(function() {
   $(this).toggleClass('open show');
-  //if $(this).children().first().attr('.class') == $(open_cards[open_cards.length-1]).children().first().attr('.class') {
-    //open_cards.push(this);
-function OpenCard() {
-  if(ImgOpened == "") {
-    ImgOpened = $(this).children().first();
-    setTimeout(function() {
-      $(this).bind('click',OpenCard)
-    },500)
-  } else {
-    CurrentOpened = $(this).children().last();
-      if(ImgOpened != CurrentOpened) {
-        setTimeout(function(){
-          $(this).toggle();
-          ImgOpened ="";
-        }, 400);
-      } else {
-        $(this).parent().hide();
-        ImgFound++;
+  openCard(this);
+  moveCounter();
+  gameWon();
+});
+
+function openCard(card) {
+  open_card.push(card);
+  if (open_card.length > 1) {
+    if ($(open_card).children().first().attr('class') !=
+        $(open_card).children().last().attr('class')) {
+          setTimeout(function(){
+            $(open_card).removeClass('open show');
+            open_card = [];
+          }, 400);
+        } else {
+          $(open_card).addClass('match');
+          ImgFound++;
       }
     }
   }
-});
-// var card1 = undefined;
-// var card2 = undefined;
-//
-// $('.card').click(function() {
-//   if($(this).attr('class') === 'open show') {
-//       $card1 = list[0];
-//     } else {
-//       $card2 = list[1];
-//     }
-//      if ($($card1).text() === $($card2).text()){
-//        $(this).is('match');
-//      } else {
-//        $(this).toggleClass('card');
-//      }
-//   })
+
+  function moveCounter() {
+    move_counter++;
+    document.getElementsByClassName("moves")[0].innerHTML = move_counter;
+  }
+
+  function gameWon() {
+    if(ImgFound = list.length/2) {
+      "You have completed the game. Hit restart to play again.";
+    }
+  }
+
+  $('.restart').click(function() {
+    $('.card').children().removeClass('open show');
+    move_counter = 0;
+    ImgFound = 0;
+    shuffle(list);
+    return false;
+  })
 
 
 
 
-//   if(move_counter = list.length/2) {
-//     document.getElementsByClassName("container")[0].innerHTML = "YOU COMPLETED THE GAME-HIT RESTART TO PLAY AGAIN";
-//   }
-//   shuffle(list);
-// }
 
-//document.getElementsByClassName("moves")[0].innerHTML = move_counter;
+
 
 
 
