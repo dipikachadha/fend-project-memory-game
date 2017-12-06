@@ -60,7 +60,7 @@ function openCard(card) {
           setTimeout(function(){
             $(open_card).removeClass('open show');
             open_card = [];
-          }, 400);
+          }, 700);
         } else {
           $(open_card).addClass('match');
           ImgFound++;
@@ -74,19 +74,18 @@ function openCard(card) {
   }
 
   function gameWon() {
-    if(ImgFound = list.length/2) {
-      "You have completed the game. Hit restart to play again.";
+    if(ImgFound == list.length/2) {
+      document.getElementsByClassName("deck")[0].innerHTML = "You have completed the game. Hit restart to play again.";
     }
   }
-
-  $('.restart').click(function() {
-    $('.card').children().removeClass('open show');
-    move_counter = 0;
-    ImgFound = 0;
-    shuffle(list);
-    return false;
-  })
-
+  //
+  // $('.restart').click(function() {
+  //   $('.card').children().removeClass('open show');
+  //   move_counter = 0;
+  //   ImgFound = 0;
+  //   shuffle(list);
+  //   return false;
+  // })
 
 
 
