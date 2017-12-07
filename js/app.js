@@ -10,6 +10,7 @@ let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
  let move_counter = 0;
  let ImgFound = 0;
  open_card = [];
+ $ratingStars = $('i');
 
 
 /*
@@ -47,25 +48,31 @@ document.getElementsByClassName("deck")[0].innerHTML = text;
 
 //flipping the card when it is clicked
 $('.card').click(function() {
-  $(this).toggleClass('open show');
-  openCard(this);
-  moveCounter();
-  $ratingStars = $('i');
-  setRating();
-  gameWon();
+  if (!$(this).hasClass('open')) {
+    $(this).toggleClass('open show');
+    openCard(this);
+    moveCounter();
+    $ratingStars = $('i');
+    setRating();
+    gameWon();
+  }
 });
 
 //Comparison of two cards in order to match
 function openCard(card) {
   open_card.push(card);
+  // check if open_card array contains more than one cards
   if (open_card.length > 1) {
+    // if yes then compare two cards
     if ($(open_card).children().first().attr('class') !=
         $(open_card).children().last().attr('class')) {
-          setTimeout(function(){
-            $(open_card).removeClass('open show ').addClass('animated infinite rubberBand');
+          // add animations
+          setTimeout(function() {
+            $(open_card).removeClass('open show ')
+              .addClass('animated infinite rubberBand');
             open_card = [];
           }, 400);
-        } else {
+        } else { // on successful match
           $(open_card).addClass('match animated infinite wobble');
           ImgFound++;
           open_card = [];
@@ -80,30 +87,39 @@ function moveCounter() {
 };
 
 //SetRating as per the decrement of move_counter as stars will decrement
-var rating = 3;
+var rating;
 function setRating() {
     if(move_counter > 20 && move_counter < 25) {
       $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
-      rating = 2;
-    } else if (move_counter > 26 && move_counter < 28) {
+      rating = 3;
+    } else if (move_counter > 26 && move_counter < 35) {
       $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+      rating = 2;
+    } else if (move_counter > 36) {
       rating = 1;
-    } else if (move_counter > 29 && move_counter < 31) {
-      $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
-      rating = 0;
     }
 };
+
 
 let gameWonStatus = 0;
 //logic of finishing the game
 function gameWon() {
   if(ImgFound == list.length/2) {
-    document.getElementsByClassName("deck")[0].innerHTML =
-      'Congratulation, You Won! with ' + move_counter + ' moves and with ' + rating + ' star\n' +
-      'Hit Restart to play again';
+    // make modal appear
+    $('.modal-wrapper').toggleClass('open');
+    $('.container').toggleClass('blur-it');
+    document.getElementsByClassName("content")[0].innerHTML =`<i class = 'fa fa-thumbs-o-up'>
+    Congratulations, You Won! with ${move_counter}  moves and with ${rating}  star.\n
+    Hit Close to play again</i>`;
     gameWonStatus = 1;
   }
 };
+// close modal
+$('.btn-close').click(function() {
+  $('.modal-wrapper').toggleClass('open');
+  $('.container').toggleClass('blur-it');
+})
+
 
 //Restart the game
 $('.restart').click(function() {
@@ -114,13 +130,14 @@ $('.restart').click(function() {
 var secondsElapsed = 0;
 // Update the count down every 1 second
 var x = setInterval(function() {
-  if (!gameWonStatus) {
+  if (!gameWonStatus && $('.card').hasClass('open')) {
     secondsElapsed++;
   }
   // Display the result in the element with id="timer"
   document.getElementsByClassName("timer")[0].innerHTML =
   `<i class='fa fa-clock-o'>
-    ${Math.floor(secondsElapsed / 60)}:${
-      (secondsElapsed % 60 < 10) ?
-        ('0' + secondsElapsed % 60) : secondsElapsed % 60}</i>`;
-}, 1000);
+  ${Math.floor(secondsElapsed / 60)}:${
+    (secondsElapsed % 60 < 10) ?
+    ('0' + secondsElapsed % 60) : secondsElapsed % 60}</i>`;
+  }, 1000
+);
