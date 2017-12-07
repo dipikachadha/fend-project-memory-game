@@ -82,13 +82,13 @@ function moveCounter() {
 //SetRating as per the decrement of move_counter as stars will decrement
 var rating = 3;
 function setRating() {
-    if(move_counter > 10 && move_counter < 15) {
+    if(move_counter > 20 && move_counter < 25) {
       $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
       rating = 2;
-    } else if (move_counter > 15 && move_counter < 20) {
+    } else if (move_counter > 26 && move_counter < 28) {
       $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
       rating = 1;
-    } else if (move_counter > 20 && move_counter < 25) {
+    } else if (move_counter > 29 && move_counter < 30) {
       $ratingStars.eq(0).removeClass('fa-star').addClass('fa-star-o');
       rating = 0;
     }
