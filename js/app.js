@@ -83,13 +83,13 @@ function moveCounter() {
 var rating = 3;
 function setRating() {
     if(move_counter > 20 && move_counter < 25) {
-      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+      $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
       rating = 2;
     } else if (move_counter > 26 && move_counter < 28) {
-      $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
+      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
       rating = 1;
-    } else if (move_counter > 29 && move_counter < 30) {
-      $ratingStars.eq(0).removeClass('fa-star').addClass('fa-star-o');
+    } else if (move_counter > 29 && move_counter < 31) {
+      $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
       rating = 0;
     }
 };
