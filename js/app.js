@@ -10,7 +10,7 @@ let list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt",
  let move_counter = 0;
  let ImgFound = 0;
  open_card = [];
- var mySound;
+
 
 /*
  * Display the cards on the page
@@ -45,15 +45,14 @@ for (const card of list) {
 }
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
-
-
 //flipping the card when it is clicked
 $('.card').click(function() {
   $(this).toggleClass('open show');
   openCard(this);
   moveCounter();
-  gameWon();
+  $ratingStars = $('i');
   setRating();
+  gameWon();
 });
 
 //Comparison of two cards in order to match
@@ -81,25 +80,28 @@ function moveCounter() {
 };
 
 //SetRating as per the decrement of move_counter as stars will decrement
+var rating = 3;
 function setRating() {
-    var rating = 3;
     if(move_counter > 10 && move_counter < 15) {
-      $('i').eq(3).removeClass('fa-star').addClass('fa-star-o');
+      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
       rating = 2;
     } else if (move_counter > 15 && move_counter < 20) {
-      $('i').eq(2).removeClass('fa-star').addClass('fa-star-o');
+      $ratingStars.eq(1).removeClass('fa-star').addClass('fa-star-o');
       rating = 1;
     } else if (move_counter > 20 && move_counter < 25) {
-      $('i').eq(1).removeClass('fa-star').addClass('fa-star-o');
+      $ratingStars.eq(0).removeClass('fa-star').addClass('fa-star-o');
       rating = 0;
     }
-    //return(rating);
 };
 
+let gameWonStatus = 0;
 //logic of finishing the game
 function gameWon() {
   if(ImgFound == list.length/2) {
-    document.getElementsByClassName("deck")[0].innerHTML = 'Congratulation, You Won! with ' + move_counter + ' moves and with ' + rating + 'star';
+    document.getElementsByClassName("deck")[0].innerHTML =
+      'Congratulation, You Won! with ' + move_counter + ' moves and with ' + rating + ' star\n' +
+      'Hit Restart to play again';
+    gameWonStatus = 1;
   }
 };
 
@@ -112,29 +114,13 @@ $('.restart').click(function() {
 var secondsElapsed = 0;
 // Update the count down every 1 second
 var x = setInterval(function() {
-  secondsElapsed++;
-// Display the result in the element with id="timer"
+  if (!gameWonStatus) {
+    secondsElapsed++;
+  }
+  // Display the result in the element with id="timer"
   document.getElementsByClassName("timer")[0].innerHTML =
-  Math.floor(secondsElapsed / 60) + "m " + (secondsElapsed % 60) + "s ";
+  `<i class='fa fa-clock-o'>
+    ${Math.floor(secondsElapsed / 60)}:${
+      (secondsElapsed % 60 < 10) ?
+        ('0' + secondsElapsed % 60) : secondsElapsed % 60}</i>`;
 }, 1000);
-
-// var secs = 0;
-//     var id = setInterval(function(){
-//       document.getElementsByClassName("timer")[0].innerHTML = secs++;
-//     }, 1000);
-//     var stop = function() {
-//         clearInterval();
-//     }
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */

@@ -121,7 +121,7 @@ h1 {
 }
 
 .animated.infinite {
-  animation-iteration-count: 1000s;
+  animation-iteration-count: 20s;
 }
 
 .rubberBand {
