@@ -111,10 +111,16 @@ function gameWon() {
     $('.modal-wrapper').toggleClass('open');
     $('.container').toggleClass('blur-it');
     document.getElementsByClassName("content")[0].insertAdjacentHTML("afterbegin",
-    `<h3>You won with
-    ${move_counter} moves and with ${rating} star.
+      `<h3>You won!
+      moves: ${move_counter},
+      Rating : ${rating} star,
+      Time: ${(Math.floor(secondsElapsed / 60) < 10) ?
+      ('0' + Math.floor(secondsElapsed / 60)) :
+      Math.floor(secondsElapsed / 60)}:${
+      (secondsElapsed % 60 < 10) ?
+      ('0' + secondsElapsed % 60) : secondsElapsed % 60}.
     Do You want to play again?</h3>
-    `);
+  `);
     gameWonStatus = 1;
   }
 };
