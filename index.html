@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet prefetch"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch"
+      href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -16,7 +18,7 @@
         </header>
 
         <div class ="timer">
-          <i class="fa fa-clock-o"> 00:00 </i>
+          <i class="fa fa-clock-o"> </i> 00:00 
         </div>
 
         <section class="score-panel">
@@ -88,15 +90,22 @@
     <div class="modal-wrapper">
         <div class="modal">
           <div class="head">
-            <a class="btn-close trigger" href="#">
-              <i class="fa fa-times"></i>
-            </a>
+            <h2>
+              <i class='fa fa-thumbs-o-up'> </i>
+              Congrats!
+              <a class="btn-close trigger" href="#">
+                <i class="fa fa-times"></i>
+              </a>
+            </h2>
           </div>
           <div class="content">
-              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+              <div class = "confirm">
+                  <button type= button class= "btn play" >YES</button>
+                  <button type= button class= "btn-close" >NO</button>
+              </div>
           </div>
-        </div>
       </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/app.js"></script>
 </body>

@@ -212,8 +212,7 @@ h1 {
 }
 
 .modal {
-  width: 500px;
-  height: 400px;
+  width: 50%;
   display: block;
   margin: 50% 0 0 -300px;
   position: relative;
@@ -229,27 +228,35 @@ h1 {
   opacity: 1;
 }
 
+.timer {
+  font: 'Open Sans', sans-serif;
+}
+
 .head {
-  /*width: 90%;
-  height: 32px;*/
   padding: 12px 30px;
   overflow: hidden;
   background: #e2525c;
 }
 
-.btn-close {
+.btn-close, .btn {
   font-size: 28px;
+  padding: 2%;
   display: block;
   float: right;
-  color: #fff;
+  color: #ff;
+}
+
+.btn {
+  float: left;
 }
 
 .content {
-  padding: 15%;
+  padding: 5%;
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #e2525c;
-  font-size: 15px;
+  font-size: 20px;
+  overflow: hidden;
 }
 
 .fa-thumbs-o-up {

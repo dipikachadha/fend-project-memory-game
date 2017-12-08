@@ -46,19 +46,20 @@ for (const card of list) {
 }
 document.getElementsByClassName("deck")[0].innerHTML = text;
 
+let gameStarted = false;
 //flipping the card when it is clicked
 $('.card').click(function() {
   if (!$(this).hasClass('open')) {
     $(this).toggleClass('open show');
+    gameStarted = true;
     openCard(this);
-    moveCounter();
     $ratingStars = $('i');
     setRating();
     gameWon();
   }
 });
 
-//Comparison of two cards in order to match
+// Comparison of two cards in order to match
 function openCard(card) {
   open_card.push(card);
   // check if open_card array contains more than one cards
@@ -68,7 +69,7 @@ function openCard(card) {
         $(open_card).children().last().attr('class')) {
           // add animations
           setTimeout(function() {
-            $(open_card).removeClass('open show ')
+            $(open_card).removeClass('open show')
               .addClass('animated infinite rubberBand');
             open_card = [];
           }, 400);
@@ -76,11 +77,12 @@ function openCard(card) {
           $(open_card).addClass('match animated infinite wobble');
           ImgFound++;
           open_card = [];
-      }
+       }
+       moveCounter();
     }
   };
 
-//Increment of moves when a card is clicked
+// Increment of moves when a card is clicked
 function moveCounter() {
   move_counter++;
   document.getElementsByClassName("moves")[0].innerHTML = move_counter;
@@ -108,12 +110,18 @@ function gameWon() {
     // make modal appear
     $('.modal-wrapper').toggleClass('open');
     $('.container').toggleClass('blur-it');
-    document.getElementsByClassName("content")[0].innerHTML =`<i class = 'fa fa-thumbs-o-up'>
-    Congratulations, You Won! with ${move_counter}  moves and with ${rating}  star.\n
-    Hit Close to play again</i>`;
+    document.getElementsByClassName("content")[0].insertAdjacentHTML("afterbegin",
+    `<h3>You won with
+    ${move_counter} moves and with ${rating} star.
+    Do You want to play again?</h3>
+    `);
     gameWonStatus = 1;
   }
 };
+//Refersh the game if user click YES
+$('.play').click(function(){
+  location.reload()
+})
 // close modal
 $('.btn-close').click(function() {
   $('.modal-wrapper').toggleClass('open');
@@ -130,14 +138,16 @@ $('.restart').click(function() {
 var secondsElapsed = 0;
 // Update the count down every 1 second
 var x = setInterval(function() {
-  if (!gameWonStatus && $('.card').hasClass('open')) {
+  if (!gameWonStatus && gameStarted) {
     secondsElapsed++;
   }
   // Display the result in the element with id="timer"
   document.getElementsByClassName("timer")[0].innerHTML =
-  `<i class='fa fa-clock-o'>
-  ${Math.floor(secondsElapsed / 60)}:${
+  `<i class='fa fa-clock-o'></i>
+  ${(Math.floor(secondsElapsed / 60) < 10) ?
+    ('0' + Math.floor(secondsElapsed / 60)) :
+    Math.floor(secondsElapsed / 60)}:${
     (secondsElapsed % 60 < 10) ?
-    ('0' + secondsElapsed % 60) : secondsElapsed % 60}</i>`;
+    ('0' + secondsElapsed % 60) : secondsElapsed % 60}`;
   }, 1000
 );
