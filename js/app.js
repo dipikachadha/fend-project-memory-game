@@ -112,7 +112,7 @@ function gameWon() {
     $('.container').toggleClass('blur-it');
     document.getElementsByClassName("content")[0].insertAdjacentHTML("afterbegin",
       `<h3>You won!
-      moves: ${move_counter},
+      Count: ${move_counter},
       Rating : ${rating} star,
       Time: ${(Math.floor(secondsElapsed / 60) < 10) ?
       ('0' + Math.floor(secondsElapsed / 60)) :
