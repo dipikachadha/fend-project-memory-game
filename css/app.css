@@ -81,13 +81,6 @@ h1 {
     font-size: 33px;
 }
 
-
-.deck.card.back {
-    -webkit-transform: rotateY( 180deg );
-    -moz-transform: rotateY( 180deg );
-    -o-transform: rotateY( 180deg );
-    transform: rotateY( 180deg );
-}
 /*
  * Styles for the Score Panel
  */
@@ -240,7 +233,7 @@ h1 {
 
 .btn-close, .btn {
   font-size: 28px;
-  padding: 2%;
+  padding: 0% 2%;
   display: block;
   float: right;
   color: #ff;

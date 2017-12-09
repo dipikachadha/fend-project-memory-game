@@ -91,13 +91,14 @@ function moveCounter() {
 //SetRating as per the decrement of move_counter as stars will decrement
 var rating;
 function setRating() {
-    if(move_counter > 20 && move_counter < 25) {
-      $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
+    if(move_counter < 12) {
+      //$ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
       rating = 3;
-    } else if (move_counter > 26 && move_counter < 35) {
-      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
+    } else if (move_counter > 13 && move_counter < 20) {
+      $ratingStars.eq(3).removeClass('fa-star').addClass('fa-star-o');
       rating = 2;
-    } else if (move_counter > 36) {
+    } else if (move_counter > 21) {
+      $ratingStars.eq(2).removeClass('fa-star').addClass('fa-star-o');
       rating = 1;
     }
 };
@@ -117,14 +118,14 @@ function gameWon() {
       Time: ${(Math.floor(secondsElapsed / 60) < 10) ?
       ('0' + Math.floor(secondsElapsed / 60)) :
       Math.floor(secondsElapsed / 60)}:${
-      (secondsElapsed % 60 < 10) ?
-      ('0' + secondsElapsed % 60) : secondsElapsed % 60}.
+      (secondsElapsed % 60 < 10)  ?
+      ('0' + secondsElapsed % 60) : secondsElapsed % 60} .
     Do You want to play again?</h3>
   `);
     gameWonStatus = 1;
   }
 };
-//Refersh the game if user click YES
+// Refersh the game if user click YES
 $('.play').click(function(){
   location.reload()
 })
